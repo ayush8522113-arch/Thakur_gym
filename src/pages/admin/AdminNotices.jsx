@@ -34,7 +34,7 @@ const uploadMedia = async (noticeId) => {
   const token = localStorage.getItem("token");
 
   const res = await fetch(
-    `http://192.168.0.118:5000/api/notices/${noticeId}/media`,
+    `${process.env.REACT_APP_API_URL}/api/notices/${noticeId}/media`,
     {
       method: "POST",
       headers: {

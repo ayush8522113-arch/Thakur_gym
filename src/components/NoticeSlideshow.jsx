@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 const NoticeSlideshow = ({ media = [] }) => {
   const [current, setCurrent] = useState(0);
-  const baseURL = "http://192.168.0.118:5000";
+  const baseURL =`${process.env.REACT_APP_API_URL}`;
 
   // Auto slide
   useEffect(() => {
@@ -27,7 +27,7 @@ const NoticeSlideshow = ({ media = [] }) => {
   }
 
   const currentMedia = media[current];
-  const fullUrl = `http://192.168.0.118:5000/${currentMedia.url}`;
+  const fullUrl = `${process.env.REACT_APP_API_URL}/${currentMedia.url}`;
 
   return (
     <div className="notice-slideshow">
