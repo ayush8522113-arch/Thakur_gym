@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 const NoticeSlideshow = ({ media = [] }) => {
   const [current, setCurrent] = useState(0);
-  const baseURL =`${process.env.REACT_APP_API_URL}`;
+  const baseURL =`${process.env.REACT_APP_API_URL}`;//
 
   // Auto slide
   useEffect(() => {
