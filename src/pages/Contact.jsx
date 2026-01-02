@@ -73,7 +73,7 @@ const Contact = () => {
           <div className="contact-icons">
         {/* Instagram */}
         <a
-          href="https://www.instagram.com/YOUR_USERNAME/"
+          href="https://www.instagram.com/"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Instagram"
