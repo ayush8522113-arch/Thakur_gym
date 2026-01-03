@@ -28,8 +28,8 @@ const Home = () => {
             "@type": "HealthClub",
             "name": "Thakur Gym",
             "url": "https://www.thakurgym.com",
-            "logo": "https://www.thakurgym.com/logo.png",
-            "image": "https://www.thakurgym.com/images/thakur-gym-interior.jpg",
+            "logo": "https://www.thakurgym.com/Thakur-gym-logo.PNG",
+            "image": "https://www.thakurgym.com/Thakur-gym-logo.PNG",
             "description": "Thakur Gym is a modern fitness and training center offering personal training, customized workout plans, certified trainers, and high-quality gym equipment.",
             "address": {
               "@type": "PostalAddress",
@@ -53,9 +53,7 @@ const Home = () => {
         <h2>Your Fitness Journey Starts Here</h2>
 
         <p>
-          Thakur Gym provides professional personal training, customized workout
-          plans, certified trainers, and modern gym equipment to help you reach
-          your fitness goals.
+         Professional training, workout plans, and expert guidance.
         </p>
 
         <Link to="/register" className="hero-btn">
