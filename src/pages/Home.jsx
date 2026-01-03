@@ -18,7 +18,7 @@ const Home = () => {
 
         <meta
           name="description"
-          content="Thakur Gym offers personal training, customized workout plans, certified trainers, and modern gym equipment to help you achieve your fitness goals."
+          content="Professional training, workout plans, and expert guidance."
         />
 
         <script type="application/ld+json">

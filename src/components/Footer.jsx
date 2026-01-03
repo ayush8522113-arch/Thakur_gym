@@ -16,7 +16,7 @@ const Footer = () => {
 
       <div className="footer-bottom">
         <p id="foot3">© {new Date().getFullYear()} Gym Website. All rights reserved.</p>
-        <h4>Website produced  by - Ayush Saini</h4>
+        <h4>Website developed  by - Ayush Saini</h4>
         <h4>Contact: sainiayush8338@gmail.com &</h4>
             <h4>Phone: +91 7015450323.</h4> 
                   
