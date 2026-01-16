@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+// remove useEffect completely
+
 
 const NoticeSlideshow = ({ mediaUrl, mediaType }) => {
   // No media uploaded
