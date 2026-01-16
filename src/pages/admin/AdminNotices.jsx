@@ -7,7 +7,8 @@ const AdminNotices = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [notices, setNotices] = useState([]);
-  const [media, setMedia] = useState(null); // ✅ single file
+  const [media, setMedia] = useState([]);
+
 
   // Fetch notices
   const fetchNotices = async () => {
@@ -20,14 +21,25 @@ const AdminNotices = () => {
   }, []);
 
   // Handle single file selection
-  const handleFileChange = (e) => {
-    setMedia(e.target.files[0]);
-  };
+ const handleFileChange = (e) => {
+  const files = Array.from(e.target.files);
+
+  if (files.length > 10) {
+    alert("You can upload maximum 10 files");
+    return;
+  }
+
+  setMedia(files);
+};
+
 
   // Upload media AFTER notice creation
   const uploadMedia = async (noticeId) => {
     const formData = new FormData();
-    formData.append("media", media);
+    media.forEach((file) => {
+  formData.append("media", file);
+});
+
 
     const token = localStorage.getItem("token");
 
@@ -144,15 +156,18 @@ const AdminNotices = () => {
                 )}
 
                 {/* + BUTTON */}
-                <label className="add-media-btn">
-                  +
-                  <input
-                    type="file"
-                    accept="image/*,video/*"
-                    onChange={handleFileChange}
-                    hidden
-                  />
-                </label>
+                {media.length < 10 && (
+    <label className="add-media-btn">
+      +
+      <input
+        type="file"
+        multiple
+        accept="image/*,video/*"
+        onChange={handleFileChange}
+        hidden
+      />
+    </label>
+  )}
               </div>
             </div>
 
