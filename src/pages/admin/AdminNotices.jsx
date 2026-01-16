@@ -7,8 +7,7 @@ const AdminNotices = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [notices, setNotices] = useState([]);
-  const [media, setMedia] = useState([]);
-
+  const [media, setMedia] = useState([]); // ✅ array for multiple files
 
   // Fetch notices
   const fetchNotices = async () => {
@@ -20,26 +19,26 @@ const AdminNotices = () => {
     fetchNotices();
   }, []);
 
-  // Handle single file selection
- const handleFileChange = (e) => {
+  // Handle file selection (max 10)
+const handleFileChange = (e) => {
   const files = Array.from(e.target.files);
 
-  if (files.length > 10) {
-    alert("You can upload maximum 10 files");
+  if (media.length + files.length > 10) {
+    alert("You can upload maximum 10 images/videos");
     return;
   }
 
-  setMedia(files);
+  setMedia((prev) => [...prev, ...files]);
 };
 
 
-  // Upload media AFTER notice creation
+  // Upload media after notice creation
   const uploadMedia = async (noticeId) => {
     const formData = new FormData();
-    media.forEach((file) => {
-  formData.append("media", file);
-});
 
+    media.forEach((file) => {
+      formData.append("media", file);
+    });
 
     const token = localStorage.getItem("token");
 
@@ -57,7 +56,6 @@ const AdminNotices = () => {
     const data = await res.json();
 
     if (!res.ok) {
-      console.error(data);
       throw new Error(data.message || "Media upload failed");
     }
   };
@@ -81,7 +79,7 @@ const AdminNotices = () => {
 
       const noticeId = res.data.noticeId;
 
-      if (media) {
+      if (media.length > 0) {
         await uploadMedia(noticeId);
       }
 
@@ -89,7 +87,7 @@ const AdminNotices = () => {
       fetchNotices();
       setTitle("");
       setDescription("");
-      setMedia(null);
+      setMedia([]); // ✅ reset to empty array
     } catch (err) {
       console.error(err);
       alert("Failed to create notice");
@@ -139,35 +137,34 @@ const AdminNotices = () => {
             {/* MEDIA UPLOAD */}
             <div className="media-upload-box">
               <div className="media-preview-grid">
-                {media && (
-                  <div className="media-preview-item">
-                    {media.type.startsWith("video") ? (
+                {media.map((file, index) => (
+                  <div key={index} className="media-preview-item">
+                    {file.type.startsWith("video") ? (
                       <video
-                        src={URL.createObjectURL(media)}
+                        src={URL.createObjectURL(file)}
                         controls
                       />
                     ) : (
                       <img
-                        src={URL.createObjectURL(media)}
+                        src={URL.createObjectURL(file)}
                         alt="preview"
                       />
                     )}
                   </div>
-                )}
+                ))}
 
-                {/* + BUTTON */}
                 {media.length < 10 && (
-    <label className="add-media-btn">
-      +
-      <input
-        type="file"
-        multiple
-        accept="image/*,video/*"
-        onChange={handleFileChange}
-        hidden
-      />
-    </label>
-  )}
+                  <label className="add-media-btn">
+                    +
+                    <input
+                      type="file"
+                      multiple
+                      accept="image/*,video/*"
+                      onChange={handleFileChange}
+                      hidden
+                    />
+                  </label>
+                )}
               </div>
             </div>
 

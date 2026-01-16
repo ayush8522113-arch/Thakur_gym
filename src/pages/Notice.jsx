@@ -37,12 +37,9 @@ const Notice = () => {
           <p>{latestNotice.description}</p>
         </div>
 
-        {/* MEDIA */}
+        {/* MEDIA (FIXED) */}
         <div className="notice-slider">
-          <Slideshow
-            mediaUrl={latestNotice.mediaUrl}
-            mediaType={latestNotice.mediaType}
-          />
+          <Slideshow media={latestNotice.media} />
         </div>
 
       </div>
