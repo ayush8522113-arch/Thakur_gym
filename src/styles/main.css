@@ -2550,7 +2550,8 @@ body.dark-mode .admin-reviews-table tbody tr:hover {
   background: #2a2a2a;
 }
  
-body.dark-mode .hero, .slide-image2, .bmi-section{
+body.dark-mode .hero, .slide-image2, .bmi-section , .navbar{
   background:#2a2a2a;
+  color:white;
 }
 
