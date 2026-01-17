@@ -2583,3 +2583,7 @@ body.dark-mode .navbar{
  body.dark-mode .mobile-menu-left{
 background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
  }
+
+  body.dark-mode .nav-title{
+    color:white;
+  }
