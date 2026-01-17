@@ -2556,7 +2556,9 @@ body.dark-mode .hero{
 }
 body.dark-mode .hero2{
   background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-  color:white;
+}
+body.dark-mode .hero2 h1{
+color:white;
 }
 body.dark-mode .home{
   background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
@@ -2573,5 +2575,8 @@ body.dark-mode .bmi-section {
 }
 body.dark-mode .navbar{
   background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  color:white;
+}
+body.dark-mode .navbar a h1 h3{
   color:white;
 }
