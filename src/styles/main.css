@@ -1973,12 +1973,12 @@ margin-bottom: 20px;
 
 .add-review-page {
   min-height: 100vh;
-  background: #f46c04;
+  background:  rgb(251, 251, 153);
   padding: 60px 15px;
 }
 
 .add-review-page h2 {
-  color: #fff;
+  color: rgb(189, 134, 16);
   text-align: center;
   margin-bottom: 40px;
 }
@@ -2035,8 +2035,8 @@ margin-bottom: 20px;
 .review-table button {
   width: 100%;
   padding: 15px;
-  background: #d32f2f;
-  color: white;
+  background: rgb(251, 251, 153);
+  color: rgb(189, 134, 16);
   font-size: 16px;
   font-weight: 600;
   border: none;
