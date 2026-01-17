@@ -2551,19 +2551,27 @@ body.dark-mode .admin-reviews-table tbody tr:hover {
 }
  
 body.dark-mode .hero{
-  background:#2a2a2a;
+  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  color:white;
+}
+body.dark-mode .hero2{
+  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  color:white;
+}
+body.dark-mode .home{
+  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
   color:white;
 }
 
 body.dark-mode .slide-image2{
-  background:#2a2a2a;
+  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
   color:white;
 }
 body.dark-mode .bmi-section {
-  background:#2a2a2a;
+  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
   color:white;
 }
 body.dark-mode .navbar{
-  background:#2a2a2a;
+  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
   color:white;
 }
