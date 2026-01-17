@@ -28,6 +28,12 @@ import AdminStats from "./pages/admin/AdminStats";
 import AdminUsers from "./pages/admin/AdminUsers";
 import AdminContacts from "./pages/admin/AdminContacts";
 import AdminMemberships from "./pages/admin/AdminMemberships";
+import AdminReviews from "./pages/admin/AdminReviews";
+
+// Reviews (NEW)
+import ReviewsList from "./pages/ReviewsList";
+import AddReview from "./pages/AddReview";
+
 
 // Other
 import BMIChart from "./pages/BMIChart";
@@ -47,6 +53,10 @@ const AppRoutes = ({ setAuthUser }) => {
         <Route path="/bmi-chart" element={<BMIChart />} />
         <Route path="/memberships" element={<Memberships />} />
         <Route path="/payment" element={<Payment />} />
+        <Route path="/reviews" element={<ReviewsList />} />
+<Route path="/add-review" element={<AddReview />} />
+<Route path="/admin/reviews" element={<AdminReviews />} />
+
         {/* Auth */}
         <Route path="/login" element={<Login setAuthUser={setAuthUser} />} />
 

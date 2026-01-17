@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 
+
+
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -72,14 +74,18 @@ useEffect(() => {
       </span>
 
       <nav className="mobile-menu-links">
+      
         <Link to="/" onClick={closeMenu}>GuruJi's Home</Link>
         <Link to="/programs" onClick={closeMenu}>GuruJi's Programs</Link>
         <Link to="/admin/notices">Admin Section</Link>
          <Link to="/memberships">Memberships</Link>
         <Link to="/booking" onClick={closeMenu}>Booking</Link>
         <Link to="/login" onClick={closeMenu}>Login</Link>
+        <Link to="/reviews">Reviews</Link>
+
         <Link to="/notices" onClick={closeMenu}>Notices</Link>
         <Link to="/register" onClick={closeMenu}>Join Now</Link>
+
         
       </nav>
     </div>

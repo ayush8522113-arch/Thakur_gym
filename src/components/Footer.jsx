@@ -1,3 +1,13 @@
+import { NavLink } from "react-router-dom";
+const enableDarkMode = () => {
+    document.body.classList.add("dark-mode");
+  };
+
+  const disableDarkMode = () => {
+    document.body.classList.remove("dark-mode");
+  };
+
+
 const Footer = () => {
   return (
     <footer className="footer">
@@ -9,7 +19,9 @@ const Footer = () => {
           <a href="/">Home</a>
           <a href="/programs">Programs</a>
           <a href="/contact">Contact</a>
-
+<NavLink to="/add-review">Add Review</NavLink><br></br>
+    <button onClick={enableDarkMode}>🌚</button>
+      <button onClick={disableDarkMode}>☀️</button>
         </div>
 
       </div>
@@ -19,7 +31,7 @@ const Footer = () => {
         <h4>Website developed  by - Ayush Saini</h4>
         <h4>Contact: sainiayush8338@gmail.com &</h4>
             <h4>Phone: +91 7015450323.</h4> 
-                  
+              
       </div>
       
     </footer>
