@@ -18,8 +18,8 @@ const Footer = () => {
         <div className="footer-links">
           <a href="/">Home</a>
           <a href="/programs">Programs</a>
-          <a href="/contact">Contact</a>
-<NavLink to="/add-review">Add Review</NavLink><br></br>
+          <a href="/contact">Contact</a><br></br>
+<NavLink to="/add-review">Add Reviews</NavLink><br></br>
     <button onClick={enableDarkMode}>🌚</button>
       <button onClick={disableDarkMode}>☀️</button>
         </div>

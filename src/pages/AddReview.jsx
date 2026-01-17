@@ -11,7 +11,7 @@ const AddReview = () => {
   const [about, setAbout] = useState("");
   const [image, setImage] = useState(null);
   const [error, setError] = useState("");
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
