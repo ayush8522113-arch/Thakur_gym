@@ -1963,23 +1963,7 @@ margin-bottom: 20px;
 }
 
 /* ===== MOBILE RESPONSIVE ===== */
-@media (max-width: 900px) {
-  .reviews-list {
-    flex-wrap: wrap; /* 👈 stack on mobile */
-     overflow-x: hidden;
-    
-  }
 
-  .review-card.featured {
-    transform: scale(1);
-  }
-}
-
-@media (max-width: 600px) {
-  .review-card {
-    width: 100%;
-  }
-}
 
 
 
@@ -2144,21 +2128,91 @@ margin-bottom: 20px;
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
 }
-/* Tablet */ @media (max-width: 1100px) { .reviews-grid { grid-template-columns: repeat(2, 1fr); } }
+/* Tablet */ @media (max-width: 1100px) { .reviews-grid { grid-template-columns: repeat(1, 1fr); } }
 
-@media (max-width: 768px) {
-  .reviews-carousel {
-    justify-content: flex-start; /* 🔥 IMPORTANT */
-    
+/* ============================= */
+/* 📱 COMPACT MOBILE REVIEWS */
+/* ============================= */
+
+@media (max-width: 600px) {
+
+
+  /* Page padding */
+  .reviews-page {
+    padding: 30px 12px;
   }
 
-  .reviews-carousel .review-card {
-    scroll-snap-align: start; /* 🔥 first card fully visible */
-    flex: 0 0 calc(100vw - 32px); /* 🔥 fits screen */
-    max-width: calc(100vw - 32px);
-  
+  /* Carousel spacing */
+    .reviews-carousel {
+    display: flex;
+    justify-content: flex-start;
+    gap: 0;                 /* 🔥 NO GAP */
+    padding: 0;             /* 🔥 NO SIDE SPACE */
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+  }
+
+.reviews-carousel .review-card {
+    flex: 0 0 100%;         /* 🔥 EXACTLY ONE CARD */
+    max-width: 100%;
+    scroll-snap-align: start;
+    margin: 0;              /* 🔥 NO margin */
+    border-radius: 0;       /* optional: cleaner edge-to-edge */
+  }
+
+  /* Review card */
+  .review-card {
+    padding: 14px;
+    border-radius: 10px;
+  }
+
+  /* Featured card (still slightly bigger) */
+  .review-card.featured {
+    transform: scale(1.05);
+  }
+
+  /* Brand */
+  .review-brand {
+    font-size: 12px;
+    margin-bottom: 6px;
+  }
+
+  /* Stars */
+  .review-stars span {
+    font-size: 14px;
+  }
+
+  /* Review text */
+  .review-desc {
+    font-size: 13px;
+    line-height: 1.4;
+    margin: 10px 0;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* 🔥 limits height */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* User section */
+  .review-user {
+    gap: 8px;
+  }
+
+  .review-user img {
+    width: 32px;
+    height: 32px;
+  }
+
+  .review-user h4 {
+    font-size: 13px;
+  }
+
+  .review-user span {
+    font-size: 11px;
   }
 }
+
 
 
 .review-card {
@@ -2380,19 +2434,90 @@ body.dark-mode .review-user span {
 /* RESPONSIVE (MOBILE) */
 /* ============================= */
 
+/* ============================= */
+/* VISIBILITY CONTROL */
+/* ============================= */
+
+.admin-desktop-only {
+  display: table-row-group;
+}
+
+.admin-mobile-only {
+  display: none;
+}
+
+
+/* ============================= */
+/* MOBILE CARD LAYOUT */
+/* ============================= */
+
 @media (max-width: 768px) {
-  .admin-reviews-page {
-    padding: 25px 15px;
+   .admin-desktop-only {
+    display: none;
   }
 
-  .admin-reviews-title {
-    font-size: 22px;
+  .admin-mobile-only {
+    display: block;
   }
 
-  .admin-reviews-table {
-    min-width: 700px;
+  .admin-table-wrapper {
+    box-shadow: none;
+    background: transparent;
+  }
+
+  .admin-review-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .admin-review-card {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+  }
+
+  .card-stars {
+    color: #fbc02d;
+    font-size: 13px;
+  }
+
+  .card-text {
+    font-size: 13px;
+    margin: 8px 0;
+    color: #555;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* 🔥 compact */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .admin-review-img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .admin-btn {
+    padding: 4px 8px;
+    font-size: 11px;
   }
 }
+
 
 /* ============================= */
 /* DARK MODE SUPPORT */

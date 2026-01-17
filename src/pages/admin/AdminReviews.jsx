@@ -47,45 +47,74 @@ const AdminReviews = () => {
           </tr>
         </thead>
 
-        <tbody>
-          {reviews.map((review) => (
-            <tr key={review._id}>
-              <td>
-                <strong>{review.name}</strong>
-              </td>
+{/* DESKTOP TABLE */}
+<tbody className="admin-desktop-only">
+  {reviews.map((review) => (
+    <tr key={review._id}>
+      <td><strong>{review.name}</strong></td>
+      <td>{review.description}</td>
+      <td>
+        <div className="admin-stars">
+          {"★".repeat(review.rating)}
+        </div>
+      </td>
+      <td>
+        {review.image && (
+          <img
+            src={review.image}
+            alt={review.name}
+            className="admin-review-img"
+          />
+        )}
+      </td>
+      <td>
+        <button
+          className="admin-btn delete"
+          onClick={() => deleteReview(review._id)}
+        >
+          Delete
+        </button>
+      </td>
+    </tr>
+  ))}
+</tbody>
 
-              <td>{review.description}</td>
-
-              <td>
-                <div className="admin-stars">
-                  {"★".repeat(review.rating)}
-                </div>
-              </td>
-
-              <td>
-                {review.image && (
-                  <img
-                    src={review.image}
-                    alt={review.name}
-                    className="admin-review-img"
-                  />
-                )}
-              </td>
-
-              <td>
-                <div className="admin-actions">
-                  <button
-                    className="admin-btn delete"
-                    onClick={() => deleteReview(review._id)}
-                  >
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
-          ))}
-        </tbody>
       </table>
+
+{/* MOBILE CARDS */}
+<div className="admin-mobile-only admin-review-cards">
+  {reviews.map((review) => (
+    <div key={review._id} className="admin-review-card">
+      <div className="card-header">
+        <strong>{review.name}</strong>
+        <span className="card-stars">
+          {"★".repeat(review.rating)}
+        </span>
+      </div>
+
+      <p className="card-text">{review.description}</p>
+
+      <div className="card-footer">
+        {review.image && (
+          <img
+            src={review.image}
+            alt={review.name}
+            className="admin-review-img"
+          />
+        )}
+
+        <button
+          className="admin-btn delete"
+          onClick={() => deleteReview(review._id)}
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+  ))}
+</div>
+
+
     </div>
   )}
 </div>
