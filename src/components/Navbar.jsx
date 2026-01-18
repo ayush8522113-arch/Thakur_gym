@@ -41,6 +41,7 @@ useEffect(() => {
         <li><Link to="/">Home</Link></li>
         <li><Link to="/programs">Programs</Link></li>
         <li><Link to="/booking">Booking</Link></li>
+         <Link to="/timings">Timings</Link>
         <li><Link to="/login">Login</Link></li>
          <li><Link to="/notices">Notices</Link></li> 
          <li><Link to="/memberships">Memberships</Link></li>
@@ -82,6 +83,7 @@ useEffect(() => {
         <Link to="/booking" onClick={closeMenu}>Booking</Link>
         <Link to="/login" onClick={closeMenu}>Login</Link>
         <Link to="/reviews">Reviews</Link>
+        <Link to="/timings">Timings</Link>
 
         <Link to="/notices" onClick={closeMenu}>Notices</Link>
         <Link to="/register" onClick={closeMenu}>Join Now</Link>

@@ -1270,7 +1270,7 @@ background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  background: linear-gradient(135deg, #2d9ece, #265868, #3184a8);
   padding: 20px;
 }
 
@@ -2597,3 +2597,159 @@ background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
     body.dark-mode .page-title{
     color:white;
   }
+  body.dark-mode .user-greeting{
+   background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  }
+  body.dark-mode .admin-badge{
+   color:white;
+  }
+  body.dark-mode .user-greeting {
+   background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  
+  }
+  body.dark-mode .nav-links a , .nav-links li , .menu-icon.mobile-only{
+    color:white;
+  }
+  body.dark-mode  .program-details-page{
+    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  }
+    body.dark-mode  .add-review-page{
+    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  }
+  body.dark-mode  .review-table{
+    color:black;
+  }
+    body.dark-mode  .contact-page{
+    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  }
+    body.dark-mode  .page-subtitle{
+    color:white;
+  }
+    body.dark-mode  .notice-page {
+    background:linear-gradient(135deg,#1f83ad,#28515f,#2d9fd1);
+  }
+    body.dark-mode  .notice-box{
+    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  }
+    body.dark-mode  .notice-channel-name{
+    color:white;
+  }
+    body.dark-mode  .timings-page{
+    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  }
+    body.dark-mode  .timings-page table{
+   color:black;
+  }
+    body.dark-mode  .bodyfat-container{
+    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  }
+    body.dark-mode  .admin-page{
+    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  }
+   body.dark-mode  .admin-header a{
+   color:white;
+  }
+     body.dark-mode  .admin-card table{
+    color:black;
+  }
+  /* ============================= */
+/* PAGE */
+/* ============================= */
+
+.timings-page {
+  padding: 40px 20px;
+  min-height: 100vh;
+  background: #f4f6f8;
+}
+
+.timings-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+/* ============================= */
+/* CARD */
+/* ============================= */
+
+.timings-card {
+  max-width: 800px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  overflow-x: auto;
+}
+
+/* ============================= */
+/* TABLE */
+/* ============================= */
+
+.timings-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.timings-table th {
+  background: #d32f2f;
+  color: white;
+  padding: 14px;
+  font-size: 14px;
+}
+
+.timings-table td {
+  padding: 14px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+/* ============================= */
+/* MOBILE CARDS */
+/* ============================= */
+
+.timings-cards {
+  display: none;
+  max-width: 500px;
+  margin: 0 auto;
+  gap: 15px;
+}
+
+.timing-item {
+  background: white;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+}
+
+.timing-item h4 {
+  margin-bottom: 8px;
+  color: #d32f2f;
+}
+
+/* ============================= */
+/* RESPONSIVE */
+/* ============================= */
+.timings-desktop-only {
+  display: block;
+}
+
+.timings-mobile-only {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .timings-desktop-only {
+    display: none;
+  }
+
+  .timings-mobile-only {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .timings-title {
+    font-size: 22px;
+  }
+}

@@ -12,6 +12,7 @@ import Contact from "./pages/Contact";
 import Notice from "./pages/Notice";
 import Memberships from "./pages/features/Memberships";
 import Payment from "./pages/features/Payment";
+import Timings from "./pages/Timings";
 
 // Features
 import PersonalTraining from "./pages/features/PersonalTraining";
@@ -56,6 +57,7 @@ const AppRoutes = ({ setAuthUser }) => {
         <Route path="/reviews" element={<ReviewsList />} />
 <Route path="/add-review" element={<AddReview />} />
 <Route path="/admin/reviews" element={<AdminReviews />} />
+  <Route path="/timings" element={<Timings />} />
 
         {/* Auth */}
         <Route path="/login" element={<Login setAuthUser={setAuthUser} />} />
