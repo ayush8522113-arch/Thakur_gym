@@ -4,24 +4,38 @@ import Loader from "../components/Loader";
 import Slideshow from "../components/NoticeSlideshow";
 
 const Notice = () => {
-  // 🔑 KEY: null means "still loading"
+  /**
+   * null  -> still loading (KEEP loader)
+   * []    -> loaded but no notices
+   * [..]  -> loaded with data
+   */
   const [notices, setNotices] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    let isMounted = true; // safety
+    let mounted = true;
 
     API.get("/notices")
       .then((res) => {
-        if (!isMounted) return;
-        setNotices(res.data || []);
+        if (!mounted) return;
+
+        if (Array.isArray(res.data)) {
+          setNotices(res.data);
+        } else {
+          setNotices([]);
+        }
       })
       .catch((err) => {
         console.error("Failed to load notices", err);
-        if (isMounted) setNotices([]); // still end loading safely
+
+        // ❗ DO NOT end loading on error
+        if (mounted) {
+          setError("Server is waking up, please wait…");
+        }
       });
 
     return () => {
-      isMounted = false;
+      mounted = false;
     };
   }, []);
 
@@ -29,16 +43,22 @@ const Notice = () => {
     <div className="notice-page">
       <div className="notice-box">
 
-        {/* HEADER ALWAYS VISIBLE */}
+        {/* HEADER ALWAYS RENDERS */}
         <div className="notice-header">
           <div className="notice-channel-pic"></div>
           <h2 className="notice-channel-name">THAKUR GYM</h2>
         </div>
 
-        {/* 🔥 THIS IS THE FIX */}
+        {/* 🔥 DATA-DRIVEN LOADER */}
         {notices === null ? (
-          // 👇 Loader stays UNTIL notices is NOT null
-          <Loader text="Please wait a few seconds to load notices…" />
+          <>
+            <Loader />
+            {error && (
+              <p style={{ textAlign: "center", opacity: 0.7 }}>
+                {error}
+              </p>
+            )}
+          </>
         ) : notices.length === 0 ? (
           <p style={{ textAlign: "center" }}>No notices available</p>
         ) : (

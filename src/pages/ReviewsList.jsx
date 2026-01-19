@@ -4,37 +4,42 @@ import Loader from "../components/Loader";
 
 const ReviewsList = () => {
   /**
-   * 🔑 KEY IDEA
-   * null  -> still loading (show Loader)
+   * null  -> still loading (KEEP loader)
    * []    -> loaded but no reviews
    * [..]  -> loaded with reviews
    */
   const [reviews, setReviews] = useState(null);
-  const [error, setError] = useState("");
+  const [error, setError] = useState(null);
   const [showAll, setShowAll] = useState(false);
   const listRef = useRef(null);
 
   // ===============================
-  // Fetch reviews (DATA DRIVEN)
+  // Fetch reviews (DATA-DRIVEN)
   // ===============================
   useEffect(() => {
-    let isMounted = true;
+    let mounted = true;
 
     API.get("/reviews")
       .then((res) => {
-        if (!isMounted) return;
-        setReviews(Array.isArray(res.data) ? res.data : []);
+        if (!mounted) return;
+
+        if (Array.isArray(res.data)) {
+          setReviews(res.data);
+        } else {
+          setReviews([]);
+        }
       })
       .catch((err) => {
         console.error("Failed to load reviews", err);
-        if (isMounted) {
-          setError("Failed to load reviews");
-          setReviews([]); // ❗ end loading safely
+
+        // ❗ DO NOT end loading here
+        if (mounted) {
+          setError("Server is waking up, please wait…");
         }
       });
 
     return () => {
-      isMounted = false;
+      mounted = false;
     };
   }, []);
 
@@ -42,7 +47,7 @@ const ReviewsList = () => {
   // Auto-scroll carousel
   // ===============================
   useEffect(() => {
-    if (showAll || reviews === null || !listRef.current) return;
+    if (reviews === null || showAll || !listRef.current) return;
 
     const interval = setInterval(() => {
       listRef.current.scrollBy({
@@ -52,7 +57,7 @@ const ReviewsList = () => {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [showAll, reviews]);
+  }, [reviews, showAll]);
 
   // ===============================
   // RENDER
@@ -61,11 +66,16 @@ const ReviewsList = () => {
     <div className="reviews-page">
       <h2 className="reviews-title">THEY TRUSTED US</h2>
 
-      {/* 🔥 LOADER STAYS UNTIL DATA EXISTS */}
+      {/* 🔥 DATA-DRIVEN LOADER */}
       {reviews === null ? (
-        <Loader text="Please wait a few seconds to load reviews…" />
-      ) : error ? (
-        <p style={{ color: "white", textAlign: "center" }}>{error}</p>
+        <>
+          <Loader />
+          {error && (
+            <p style={{ textAlign: "center", opacity: 0.7 }}>
+              {error}
+            </p>
+          )}
+        </>
       ) : reviews.length === 0 ? (
         <p style={{ textAlign: "center" }}>No reviews available</p>
       ) : (
@@ -85,7 +95,6 @@ const ReviewsList = () => {
                   className={`review-card ${
                     index === 1 && !showAll ? "featured" : ""
                   }`}
-                  style={{ animationDelay: `${index * 0.15}s` }}
                 >
                   <div className="review-brand">Thakur Gym</div>
 
