@@ -16,7 +16,7 @@ const Notice = () => {
           setNotices(Array.isArray(res.data) ? res.data : []);
         }
       } catch {
-        // ❗ Do nothing – skeleton stays
+        // ❗ Do nothing → skeleton stays
       }
     };
 
@@ -33,7 +33,7 @@ const Notice = () => {
     <div className="notice-page">
       <div className="notice-box">
 
-        {/* HEADER (always visible) */}
+        {/* HEADER (stable, no flash) */}
         <div className="notice-header">
           <div className="notice-channel-pic"></div>
           <h2 className="notice-channel-name">THAKUR GYM</h2>
@@ -50,10 +50,11 @@ const Notice = () => {
         {/* BODY */}
         {!notices ? (
           <>
-            <Skeleton height={24} />
-            <Skeleton height={24} />
-            <Skeleton height={24} />
-            <Skeleton height={200} />
+            <Skeleton height={28} width="60%" />
+            <Skeleton height={18} />
+            <Skeleton height={18} width="90%" />
+            <Skeleton height={18} width="85%" />
+            <Skeleton height={220} style={{ marginTop: "20px" }} />
           </>
         ) : notices.length === 0 ? (
           <p style={{ textAlign: "center" }}>No notices available</p>

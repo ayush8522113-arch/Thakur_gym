@@ -1,10 +1,15 @@
 
 
-const Skeleton = ({ height = 16, width = "100%", style = {} }) => {
+const Skeleton = ({ height = 18, width = "100%", style = {} }) => {
   return (
     <div
       className="skeleton"
-      style={{ height, width, ...style }}
+      style={{
+        height,
+        width,
+        marginBottom: "14px",
+        ...style,
+      }}
     />
   );
 };
