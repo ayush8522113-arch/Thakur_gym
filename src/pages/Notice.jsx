@@ -3,28 +3,26 @@ import API from "../api/api";
 import Loader from "../components/Loader";
 import Slideshow from "../components/NoticeSlideshow";
 
-const RETRY_DELAY = 3000; // 3 seconds
-
 const Notice = () => {
+  /**
+   * null  -> loading (show ONLY loader)
+   * []    -> loaded but empty
+   * [..]  -> loaded with data
+   */
   const [notices, setNotices] = useState(null);
 
   useEffect(() => {
     let mounted = true;
-    let retryTimeout;
 
     const fetchNotices = async () => {
       try {
         const res = await API.get("/notices");
-
         if (!mounted) return;
 
-        // ✅ SUCCESS → END LOADING
         setNotices(Array.isArray(res.data) ? res.data : []);
       } catch (err) {
-        // ❗ FAILURE → KEEP LOADER + RETRY
-        if (!mounted) return;
-
-        retryTimeout = setTimeout(fetchNotices, RETRY_DELAY);
+        // ❗ keep loader visible if backend is still waking
+        console.error("Notice backend not ready yet...");
       }
     };
 
@@ -32,42 +30,51 @@ const Notice = () => {
 
     return () => {
       mounted = false;
-      clearTimeout(retryTimeout);
     };
   }, []);
+
+  // 🔥 CRITICAL FIX:
+  // NOTHING else renders until data exists
+  if (notices === null) {
+    return <Loader />;
+  }
+
+  if (notices.length === 0) {
+    return (
+      <div className="notice-page">
+        <div className="notice-box" style={{ textAlign: "center" }}>
+          <h3>No notices available</h3>
+        </div>
+      </div>
+    );
+  }
+
+  const latestNotice = notices[0];
 
   return (
     <div className="notice-page">
       <div className="notice-box">
+        {/* HEADER */}
         <div className="notice-header">
           <div className="notice-channel-pic"></div>
           <h2 className="notice-channel-name">THAKUR GYM</h2>
+          <h5>
+            Posted on:{" "}
+            {latestNotice?.createdAt
+              ? new Date(latestNotice.createdAt).toLocaleString()
+              : "—"}
+          </h5>
         </div>
 
-        {/* 🔥 LOADER STAYS UNTIL SUCCESS */}
-        {notices === null ? (
-          <Loader />
-        ) : notices.length === 0 ? (
-          <p style={{ textAlign: "center" }}>No notices available</p>
-        ) : (
-          <>
-            <h5>
-              Posted on:{" "}
-              {notices[0]?.createdAt
-                ? new Date(notices[0].createdAt).toLocaleString()
-                : "—"}
-            </h5>
+        {/* BODY */}
+        <div className="notice-title">
+          <h3>{latestNotice.title}</h3>
+          <p>{latestNotice.description}</p>
+        </div>
 
-            <div className="notice-title">
-              <h3>{notices[0].title}</h3>
-              <p>{notices[0].description}</p>
-            </div>
-
-            <div className="notice-slider">
-              <Slideshow media={notices[0].media || []} />
-            </div>
-          </>
-        )}
+        <div className="notice-slider">
+          <Slideshow media={latestNotice.media || []} />
+        </div>
       </div>
     </div>
   );
