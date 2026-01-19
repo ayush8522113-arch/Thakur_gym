@@ -2,80 +2,58 @@ import React, { useEffect, useState, useRef } from "react";
 import API from "../api/api";
 import Loader from "../components/Loader";
 
+const RETRY_DELAY = 3000;
+
 const ReviewsList = () => {
-  /**
-   * null  -> still loading (KEEP loader)
-   * []    -> loaded but no reviews
-   * [..]  -> loaded with reviews
-   */
   const [reviews, setReviews] = useState(null);
-  const [error, setError] = useState(null);
   const [showAll, setShowAll] = useState(false);
   const listRef = useRef(null);
 
-  // ===============================
-  // Fetch reviews (DATA-DRIVEN)
-  // ===============================
   useEffect(() => {
     let mounted = true;
+    let retryTimeout;
 
-    API.get("/reviews")
-      .then((res) => {
+    const fetchReviews = async () => {
+      try {
+        const res = await API.get("/reviews");
+
         if (!mounted) return;
 
-        if (Array.isArray(res.data)) {
-          setReviews(res.data);
-        } else {
-          setReviews([]);
-        }
-      })
-      .catch((err) => {
-        console.error("Failed to load reviews", err);
+        // ✅ SUCCESS
+        setReviews(Array.isArray(res.data) ? res.data : []);
+      } catch (err) {
+        // ❗ FAILURE → RETRY, KEEP LOADER
+        if (!mounted) return;
 
-        // ❗ DO NOT end loading here
-        if (mounted) {
-          setError("Server is waking up, please wait…");
-        }
-      });
+        retryTimeout = setTimeout(fetchReviews, RETRY_DELAY);
+      }
+    };
+
+    fetchReviews();
 
     return () => {
       mounted = false;
+      clearTimeout(retryTimeout);
     };
   }, []);
 
-  // ===============================
-  // Auto-scroll carousel
-  // ===============================
   useEffect(() => {
     if (reviews === null || showAll || !listRef.current) return;
 
     const interval = setInterval(() => {
-      listRef.current.scrollBy({
-        left: 350,
-        behavior: "smooth",
-      });
+      listRef.current.scrollBy({ left: 350, behavior: "smooth" });
     }, 3000);
 
     return () => clearInterval(interval);
   }, [reviews, showAll]);
 
-  // ===============================
-  // RENDER
-  // ===============================
   return (
     <div className="reviews-page">
       <h2 className="reviews-title">THEY TRUSTED US</h2>
 
-      {/* 🔥 DATA-DRIVEN LOADER */}
+      {/* 🔥 LOADER UNTIL BACKEND RESPONDS */}
       {reviews === null ? (
-        <>
-          <Loader />
-          {error && (
-            <p style={{ textAlign: "center", opacity: 0.7 }}>
-              {error}
-            </p>
-          )}
-        </>
+        <Loader />
       ) : reviews.length === 0 ? (
         <p style={{ textAlign: "center" }}>No reviews available</p>
       ) : (

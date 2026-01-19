@@ -3,62 +3,50 @@ import API from "../api/api";
 import Loader from "../components/Loader";
 import Slideshow from "../components/NoticeSlideshow";
 
+const RETRY_DELAY = 3000; // 3 seconds
+
 const Notice = () => {
-  /**
-   * null  -> still loading (KEEP loader)
-   * []    -> loaded but no notices
-   * [..]  -> loaded with data
-   */
   const [notices, setNotices] = useState(null);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     let mounted = true;
+    let retryTimeout;
 
-    API.get("/notices")
-      .then((res) => {
+    const fetchNotices = async () => {
+      try {
+        const res = await API.get("/notices");
+
         if (!mounted) return;
 
-        if (Array.isArray(res.data)) {
-          setNotices(res.data);
-        } else {
-          setNotices([]);
-        }
-      })
-      .catch((err) => {
-        console.error("Failed to load notices", err);
+        // ✅ SUCCESS → END LOADING
+        setNotices(Array.isArray(res.data) ? res.data : []);
+      } catch (err) {
+        // ❗ FAILURE → KEEP LOADER + RETRY
+        if (!mounted) return;
 
-        // ❗ DO NOT end loading on error
-        if (mounted) {
-          setError("Server is waking up, please wait…");
-        }
-      });
+        retryTimeout = setTimeout(fetchNotices, RETRY_DELAY);
+      }
+    };
+
+    fetchNotices();
 
     return () => {
       mounted = false;
+      clearTimeout(retryTimeout);
     };
   }, []);
 
   return (
     <div className="notice-page">
       <div className="notice-box">
-
-        {/* HEADER ALWAYS RENDERS */}
         <div className="notice-header">
           <div className="notice-channel-pic"></div>
           <h2 className="notice-channel-name">THAKUR GYM</h2>
         </div>
 
-        {/* 🔥 DATA-DRIVEN LOADER */}
+        {/* 🔥 LOADER STAYS UNTIL SUCCESS */}
         {notices === null ? (
-          <>
-            <Loader />
-            {error && (
-              <p style={{ textAlign: "center", opacity: 0.7 }}>
-                {error}
-              </p>
-            )}
-          </>
+          <Loader />
         ) : notices.length === 0 ? (
           <p style={{ textAlign: "center" }}>No notices available</p>
         ) : (
@@ -80,7 +68,6 @@ const Notice = () => {
             </div>
           </>
         )}
-
       </div>
     </div>
   );
