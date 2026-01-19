@@ -1,7 +1,7 @@
 import Slideshow from "../components/NoticeSlideshow";
 import API from "../api/api";
 import { useEffect, useState } from "react";
-import Loader from "../components/Loader"
+
 const Notice = () => {
   const [notices, setNotices] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -28,7 +28,7 @@ const Notice = () => {
     return (
       <div className="notice-page">
         <div className="notice-box" style={{ textAlign: "center" }}>
-          <Loader/>
+        
           <h3>Please wait a few seconds to load notices…</h3>
         </div>
       </div>
