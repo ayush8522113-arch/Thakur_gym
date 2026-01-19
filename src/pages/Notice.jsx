@@ -3,9 +3,11 @@ import API from "../api/api";
 import Loader from "../components/Loader";
 import Slideshow from "../components/NoticeSlideshow";
 
+const RETRY_DELAY = 3000; // 3 seconds
+
 const Notice = () => {
   /**
-   * null  -> loading (show ONLY loader)
+   * null  -> loading (KEEP loader)
    * []    -> loaded but empty
    * [..]  -> loaded with data
    */
@@ -13,16 +15,22 @@ const Notice = () => {
 
   useEffect(() => {
     let mounted = true;
+    let retryTimeout;
 
     const fetchNotices = async () => {
       try {
         const res = await API.get("/notices");
+
         if (!mounted) return;
 
+        // ✅ SUCCESS → END LOADING
         setNotices(Array.isArray(res.data) ? res.data : []);
       } catch (err) {
-        // ❗ keep loader visible if backend is still waking
-        console.error("Notice backend not ready yet...");
+        // ❗ FAILURE → backend still cold
+        // KEEP loader + retry
+        if (!mounted) return;
+
+        retryTimeout = setTimeout(fetchNotices, RETRY_DELAY);
       }
     };
 
@@ -30,11 +38,11 @@ const Notice = () => {
 
     return () => {
       mounted = false;
+      clearTimeout(retryTimeout);
     };
   }, []);
 
-  // 🔥 CRITICAL FIX:
-  // NOTHING else renders until data exists
+  // 🔥 NOTHING ELSE RENDERS UNTIL DATA EXISTS
   if (notices === null) {
     return <Loader />;
   }
@@ -81,3 +89,4 @@ const Notice = () => {
 };
 
 export default Notice;
+
