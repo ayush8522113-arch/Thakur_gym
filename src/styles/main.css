@@ -2652,6 +2652,10 @@ background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
      body.dark-mode  .admin-card table{
     color:black;
   }
+
+       body.dark-mode  .feature-box{
+    color:black;
+  }
   /* ============================= */
 /* PAGE */
 /* ============================= */
@@ -2753,3 +2757,7 @@ background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
     font-size: 22px;
   }
 }
+
+    body.dark-mode  .timings-mobile-only{
+    color:black;
+  }

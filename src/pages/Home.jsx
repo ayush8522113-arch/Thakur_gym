@@ -128,10 +128,10 @@ const downloadSlip = async (paymentId) => {
 
       {/* 🔹 HERO SECTION */}
       <section className="hero">
-        <h1>Thakur Gym, the Best Gym of Jagadhri and Yamunanagar</h1>
-        <h2>Strong Bodies. Strong Minds.</h2>
-        <h2>Transform Your Body, Transform Your Life</h2>
-        <h2>Your Fitness Journey Starts Here</h2>
+        <h2>Thakur Gym, the Best Gym of Jagadhri and Yamunanagar</h2>
+        <h4>Strong Bodies. Strong Minds.</h4>
+        <h4>Transform Your Body, Transform Your Life</h4>
+        <h4>Your Fitness Journey Starts Here</h4>
 
         <p>
          Thakur gym in jagadhri is best gym for Professional training, workout plans, and expert guidance.
