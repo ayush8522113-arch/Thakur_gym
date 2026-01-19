@@ -1,32 +1,50 @@
 import Slideshow from "../components/NoticeSlideshow";
 import API from "../api/api";
 import { useEffect, useState } from "react";
-import Loader from "../components/Loader";
+import Loader from "../components/Loader"
 const Notice = () => {
   const [notices, setNotices] = useState([]);
-const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-  const fetchNotices = async () => {
-    try {
-      // Wake backend (Render cold start fix)
-      await API.get("/health");
+    const fetchNotices = async () => {
+      try {
+        // Wake backend (Render cold start fix)
+        await API.get("/health");
 
-      const res = await API.get("/notices");
-      setNotices(res.data);
-    } catch (err) {
-      console.error("Failed to load notices", err);
-    } finally {
-      setLoading(false);
-    }
-  };
+        const res = await API.get("/notices");
+        setNotices(res.data || []);
+      } catch (err) {
+        console.error("Failed to load notices", err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  fetchNotices();
-}, []);
+    fetchNotices();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="notice-page">
+        <div className="notice-box" style={{ textAlign: "center" }}>
+          <Loader/>
+          <h3>Please wait a few seconds to load notices…</h3>
+        </div>
+      </div>
+    );
+  }
 
   const latestNotice = notices[0];
 
- if (loading) {
-    return <Loader text="Loading reviews, please wait…" />;
+  if (!latestNotice) {
+    return (
+      <div className="notice-page">
+        <div className="notice-box" style={{ textAlign: "center" }}>
+          <h3>No notices available</h3>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -39,7 +57,9 @@ const [loading, setLoading] = useState(true);
           <h2 className="notice-channel-name">THAKUR GYM</h2>
           <h5>
             Posted on:{" "}
-            {new Date(latestNotice.createdAt).toLocaleString()}
+            {latestNotice?.createdAt
+              ? new Date(latestNotice.createdAt).toLocaleString()
+              : "—"}
           </h5>
         </div>
 
@@ -49,9 +69,9 @@ const [loading, setLoading] = useState(true);
           <p>{latestNotice.description}</p>
         </div>
 
-        {/* MEDIA (FIXED) */}
+        {/* MEDIA */}
         <div className="notice-slider">
-          <Slideshow media={latestNotice.media} />
+          <Slideshow media={latestNotice.media || []} />
         </div>
 
       </div>

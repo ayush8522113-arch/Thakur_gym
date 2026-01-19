@@ -1,36 +1,29 @@
 import React, { useEffect, useState, useRef } from "react";
 import API from "../api/api";
-import Loader from "../components/Loader";
+
 
 const ReviewsList = () => {
   const [reviews, setReviews] = useState([]);
   const [error, setError] = useState("");
   const [showAll, setShowAll] = useState(false);
-  const [loading, setLoading] = useState(true);
 
   // ✅ useRef INSIDE component (only once)
   const listRef = useRef(null);
 
   // Fetch reviews
-useEffect(() => {
-  const fetchReviews = async () => {
-    try {
-      // Wake backend (Render cold start fix)
-      await API.get("/health");
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const response = await API.get("/reviews");
+        setReviews(response.data);
+      } catch (err) {
+        console.error(err);
+        setError("Failed to load reviews");
+      }
+    };
 
-      const response = await API.get("/reviews");
-      setReviews(response.data);
-    } catch (err) {
-      console.error(err);
-      setError("Failed to load reviews");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  fetchReviews();
-}, []);
-
+    fetchReviews();
+  }, []);
 
   // ✅ Auto-scroll ONLY when showing top 3 (carousel mode)
   useEffect(() => {
@@ -50,10 +43,6 @@ useEffect(() => {
 
   // Show only 3 initially
   const visibleReviews = showAll ? reviews : reviews.slice(0, 3);
-
- if (loading) {
-    return <Loader text="Loading reviews, please wait…" />;
-  }
 
   return (
 
