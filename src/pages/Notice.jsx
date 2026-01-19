@@ -4,32 +4,40 @@ import Loader from "../components/Loader";
 import Slideshow from "../components/NoticeSlideshow";
 
 const Notice = () => {
-  // 🔑 null = not loaded yet
+  // 🔑 KEY: null means "still loading"
   const [notices, setNotices] = useState(null);
 
   useEffect(() => {
+    let isMounted = true; // safety
+
     API.get("/notices")
       .then((res) => {
+        if (!isMounted) return;
         setNotices(res.data || []);
       })
       .catch((err) => {
         console.error("Failed to load notices", err);
-        setNotices([]); // prevent crash
+        if (isMounted) setNotices([]); // still end loading safely
       });
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   return (
     <div className="notice-page">
       <div className="notice-box">
 
-        {/* HEADER (always visible) */}
+        {/* HEADER ALWAYS VISIBLE */}
         <div className="notice-header">
           <div className="notice-channel-pic"></div>
           <h2 className="notice-channel-name">THAKUR GYM</h2>
         </div>
 
-        {/* DATA SECTION */}
-        {!notices ? (
+        {/* 🔥 THIS IS THE FIX */}
+        {notices === null ? (
+          // 👇 Loader stays UNTIL notices is NOT null
           <Loader text="Please wait a few seconds to load notices…" />
         ) : notices.length === 0 ? (
           <p style={{ textAlign: "center" }}>No notices available</p>

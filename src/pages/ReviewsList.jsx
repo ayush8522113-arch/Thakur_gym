@@ -3,26 +3,46 @@ import API from "../api/api";
 import Loader from "../components/Loader";
 
 const ReviewsList = () => {
-  const [reviews, setReviews] = useState(null); // 🔑 null = loading
+  /**
+   * 🔑 KEY IDEA
+   * null  -> still loading (show Loader)
+   * []    -> loaded but no reviews
+   * [..]  -> loaded with reviews
+   */
+  const [reviews, setReviews] = useState(null);
   const [error, setError] = useState("");
   const [showAll, setShowAll] = useState(false);
   const listRef = useRef(null);
 
+  // ===============================
+  // Fetch reviews (DATA DRIVEN)
+  // ===============================
   useEffect(() => {
+    let isMounted = true;
+
     API.get("/reviews")
       .then((res) => {
-        setReviews(res.data || []);
+        if (!isMounted) return;
+        setReviews(Array.isArray(res.data) ? res.data : []);
       })
       .catch((err) => {
-        console.error(err);
-        setError("Failed to load reviews");
-        setReviews([]); // prevent crash
+        console.error("Failed to load reviews", err);
+        if (isMounted) {
+          setError("Failed to load reviews");
+          setReviews([]); // ❗ end loading safely
+        }
       });
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
+  // ===============================
   // Auto-scroll carousel
+  // ===============================
   useEffect(() => {
-    if (showAll || !listRef.current) return;
+    if (showAll || reviews === null || !listRef.current) return;
 
     const interval = setInterval(() => {
       listRef.current.scrollBy({
@@ -32,16 +52,20 @@ const ReviewsList = () => {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [showAll]);
+  }, [showAll, reviews]);
 
+  // ===============================
+  // RENDER
+  // ===============================
   return (
     <div className="reviews-page">
       <h2 className="reviews-title">THEY TRUSTED US</h2>
 
-      {!reviews ? (
+      {/* 🔥 LOADER STAYS UNTIL DATA EXISTS */}
+      {reviews === null ? (
         <Loader text="Please wait a few seconds to load reviews…" />
       ) : error ? (
-        <p style={{ color: "white" }}>{error}</p>
+        <p style={{ color: "white", textAlign: "center" }}>{error}</p>
       ) : reviews.length === 0 ? (
         <p style={{ textAlign: "center" }}>No reviews available</p>
       ) : (
@@ -73,15 +97,17 @@ const ReviewsList = () => {
                     ))}
                   </div>
 
-                  <p className="review-desc">“{review.description}”</p>
+                  <p className="review-desc">
+                    “{review.description || "Great experience!"}”
+                  </p>
 
                   <div className="review-user">
                     <img
                       src={review.image || "/default-user.png"}
-                      alt={review.name}
+                      alt={review.name || "User"}
                     />
                     <div>
-                      <h4>{review.name}</h4>
+                      <h4>{review.name || "Anonymous"}</h4>
                       <span>{review.about || "Gym Member"}</span>
                     </div>
                   </div>
