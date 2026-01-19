@@ -1,21 +1,33 @@
 import Slideshow from "../components/NoticeSlideshow";
 import API from "../api/api";
 import { useEffect, useState } from "react";
-
+import Loader from "../components/Loader";
 const Notice = () => {
   const [notices, setNotices] = useState([]);
-
+const [loading, setLoading] = useState(true);
   useEffect(() => {
-    const fetchNotices = async () => {
+  const fetchNotices = async () => {
+    try {
+      // Wake backend (Render cold start fix)
+      await API.get("/health");
+
       const res = await API.get("/notices");
       setNotices(res.data);
-    };
-    fetchNotices();
-  }, []);
+    } catch (err) {
+      console.error("Failed to load notices", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchNotices();
+}, []);
 
   const latestNotice = notices[0];
 
-  if (!latestNotice) return null;
+ if (loading) {
+    return <Loader text="Loading reviews, please wait…" />;
+  }
 
   return (
     <div className="notice-page">

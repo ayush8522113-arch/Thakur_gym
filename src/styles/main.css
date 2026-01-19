@@ -2761,3 +2761,63 @@ background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
     body.dark-mode  .timings-mobile-only{
     color:black;
   }
+
+  .loader-container {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at top, #111, #000);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  z-index: 9999;
+}
+
+.gym-loader {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.bar {
+  width: 10px;
+  height: 60px;
+  background: linear-gradient(180deg, #ff0000, #ff6a00);
+  animation: pump 1s infinite ease-in-out;
+}
+
+.bar:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.bar:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes pump {
+  0%, 100% { transform: scaleY(0.5); }
+  50% { transform: scaleY(1.2); }
+}
+
+h2 {
+  margin-top: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+p {
+  opacity: 0.7;
+  margin-top: 5px;
+  font-size: 14px;
+}
+.loader-container {
+  animation: fadeOut 0.8s ease forwards;
+  animation-delay: 0.2s;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
