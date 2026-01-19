@@ -2829,9 +2829,9 @@ p {
   /* Dark gym-style base */
   background: linear-gradient(
     110deg,
-    #1a1a1a 25%,
-    #2a2a2a 37%,
-    #1a1a1a 63%
+    #856903 25%,
+    #b5a903 37%,
+    #f9f92c 63%
   );
 
   background-size: 400% 100%;
