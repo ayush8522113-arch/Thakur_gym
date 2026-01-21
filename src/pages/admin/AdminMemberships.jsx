@@ -69,20 +69,22 @@ const AdminMemberships = () => {
   return (
     <div className="admin-page">
       <div style={{ padding: "30px" }}>
-        
-        {/* ===== ADMIN HEADER ===== */}
+                {/* ===== ADMIN HEADER ===== */}
         <div className="admin-header">
-          <h2>Admin Panel</h2>
-
-          <div className="admin-nav">
-            <Link to="/admin/notices">Notices</Link>
+           <h2>Admin Membership</h2>
+                  <div className="admin-nav">
+            <Link to="/admin/notices" className="active">Notices</Link>
             <Link to="/admin/bookings">Bookings</Link>
-            <Link to="/admin/users">Users</Link>
-            <Link to="/admin/memberships" className="active">
-              Memberships
-            </Link>
             <Link to="/admin/stats">Stats</Link>
+            <Link to="/admin/users">Users</Link>
+            <Link to="/admin/contacts">Contacts</Link>
+            <Link to="/admin/memberships">Memberships</Link>
+            <Link to="/admin/reviews">Reviews</Link>
+            
           </div>
+
+         
+
         </div>
 
         {/* ===== PAGE INTRO ===== */}

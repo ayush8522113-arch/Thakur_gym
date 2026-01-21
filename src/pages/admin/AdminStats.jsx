@@ -23,15 +23,16 @@ const AdminStats = () => {
     <div className="admin-page">
       <div className="admin-header">
         <h2>Admin Dashboard</h2>
-        <div className="admin-nav">
-          <Link to="/admin/notices">Notices</Link>
-          <Link to="/admin/bookings">Bookings</Link>
-          <Link to="/admin/stats" className="active">Stats</Link>
-          <Link to="/admin/users">Users</Link>
-            <Link to="/admin/memberships" className="active">
-              Memberships
-            </Link>
-        </div>
+          <div className="admin-nav">
+            <Link to="/admin/notices" className="active">Notices</Link>
+            <Link to="/admin/bookings">Bookings</Link>
+            <Link to="/admin/stats">Stats</Link>
+            <Link to="/admin/users">Users</Link>
+            <Link to="/admin/contacts">Contacts</Link>
+            <Link to="/admin/memberships">Memberships</Link>
+            <Link to="/admin/reviews">Reviews</Link>
+            
+          </div>
       </div>
 
       <div className="stats-grid">

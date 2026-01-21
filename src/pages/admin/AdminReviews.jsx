@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import API from "../../api/api";
-
+import { Link } from "react-router-dom";
 const AdminReviews = () => {
   const [reviews, setReviews] = useState([]);
 
@@ -30,8 +30,20 @@ const AdminReviews = () => {
 
   return (
     <div className="admin-reviews-page">
-  <h2 className="admin-reviews-title">Manage Reviews</h2>
-
+      <div className="admin-header">
+         <h2 className="admin-reviews-title">Manage Reviews</h2>
+                <div className="admin-nav">
+            <Link to="/admin/notices" className="active">Notices</Link>
+            <Link to="/admin/bookings">Bookings</Link>
+            <Link to="/admin/stats">Stats</Link>
+            <Link to="/admin/users">Users</Link>
+            <Link to="/admin/contacts">Contacts</Link>
+            <Link to="/admin/memberships">Memberships</Link>
+            <Link to="/admin/reviews">Reviews</Link>
+            
+          </div>
+ 
+</div>
   {reviews.length === 0 ? (
     <div className="admin-empty">No reviews found</div>
   ) : (

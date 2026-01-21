@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import API from "../../api/api";
 import { Link } from "react-router-dom";
 import "../../styles/admin.css";
-import { useNavigate } from "react-router-dom";
+
 
 const AdminNotices = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [notices, setNotices] = useState([]);
   const [media, setMedia] = useState([]); // ✅ array for multiple files
-const navigate = useNavigate();
+
 
   // Fetch notices
   const fetchNotices = async () => {
@@ -114,12 +114,8 @@ const handleFileChange = (e) => {
             <Link to="/admin/users">Users</Link>
             <Link to="/admin/contacts">Contacts</Link>
             <Link to="/admin/memberships">Memberships</Link>
-            <button
-        className="admin-btn"
-        onClick={() => navigate("/admin/reviews")}
-      >
-        Manage Reviews
-      </button>
+            <Link to="/admin/reviews">Reviews</Link>
+            
           </div>
         </div>
 

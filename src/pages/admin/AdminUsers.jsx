@@ -162,13 +162,14 @@ const fetchRegisteredUsers = async () => {
           <h2>Admin Panel</h2>
 
           <div className="admin-nav">
-            <Link to="/admin/notices">Notices</Link>
+            <Link to="/admin/notices" className="active">Notices</Link>
             <Link to="/admin/bookings">Bookings</Link>
-            <Link to="/admin/users" className="active">Users</Link>
             <Link to="/admin/stats">Stats</Link>
-              <Link to="/admin/memberships" className="active">
-                          Memberships
-                        </Link>
+            <Link to="/admin/users">Users</Link>
+            <Link to="/admin/contacts">Contacts</Link>
+            <Link to="/admin/memberships">Memberships</Link>
+            <Link to="/admin/reviews">Reviews</Link>
+            
           </div>
         </div>
 

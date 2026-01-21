@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import API from "../../api/api";
+import {Link} from "react-router-dom";
 
 const AdminBookings = () => {
   const [bookings, setBookings] = useState([]);
@@ -27,7 +28,19 @@ const AdminBookings = () => {
 
   return (
     <div style={{ padding: "30px" }}>
+      <div className="admin-header">
       <h2>Admin Booking Viewer</h2>
+                <div className="admin-nav">
+                  <Link to="/admin/notices" className="active">Notices</Link>
+                  <Link to="/admin/bookings">Bookings</Link>
+                  <Link to="/admin/stats">Stats</Link>
+                  <Link to="/admin/users">Users</Link>
+                  <Link to="/admin/contacts">Contacts</Link>
+                  <Link to="/admin/memberships">Memberships</Link>
+                  <Link to="/admin/reviews">Reviews</Link>
+                  
+                </div>
+      </div>
 
       <table className="admin-table">
   <thead>
