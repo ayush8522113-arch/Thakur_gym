@@ -196,31 +196,6 @@ admin-card input:focus,
   background: #e8fff1;
 }
 
-.admin-table {
-  width: 100%;
-  border-collapse: collapse;
-  background: white;
-  box-shadow: 0 8px 22px rgba(0,0,0,0.08);
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.admin-table th,
-.admin-table td {
-  padding: 10px 12px;
-  font-size: 14px;
-  text-align: center;
-}
-
-.admin-table th {
-  background: #f5f5f5;
-  font-weight: 600;
-}
-
-.admin-table tr:nth-child(even) {
-  background: #fafafa;
-}
-
 /* STATUS BADGES */
 .status {
   padding: 4px 10px;

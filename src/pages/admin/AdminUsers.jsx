@@ -155,7 +155,7 @@ const fetchRegisteredUsers = async () => {
 
   return (
     <div className="admin-page">
-      <div style={{ padding: "30px" }}>
+      <div style={{ padding: "0px" }}>
         
         {/* ===== ADMIN HEADER ===== */}
         <div className="admin-header">
@@ -200,7 +200,7 @@ const fetchRegisteredUsers = async () => {
             <tbody>
               {registeredUsers.length === 0 ? (
                 <tr>
-                  <td colSpan="4" style={{ textAlign: "center" }}>
+                  <td colSpan="5" style={{ textAlign: "center" }}>
                     No registered users
                   </td>
                 </tr>
@@ -209,7 +209,7 @@ const fetchRegisteredUsers = async () => {
                   <tr key={u._id}>
                     <td data-label="Name">{u.name}</td>
                     <td data-label="Email">{u.email}</td>
-                    <td date-label="phone">{u.phone}</td>
+                    <td data-label="phone">{u.phone}</td>
                    <td data-label="Start Date">{formatDateTime(u.startDate)
 }</td>
 

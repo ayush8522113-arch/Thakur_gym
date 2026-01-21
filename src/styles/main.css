@@ -1460,15 +1460,19 @@ html, body {
   max-width: 100%;
   overflow-x: hidden;
 }
-
+.admin-page{
+  padding:0px;
+  margin:0px;
+}
 
   .admin-card {
-    padding: 15px;
+    padding: 5px;
   }
 
   /* Make tables scrollable */
   .admin-table {
     display: block;
+    background: white;
     overflow-x: auto;
   }
 
@@ -1476,15 +1480,18 @@ html, body {
   .admin-table tbody,
   .admin-table tr {
     display: table;
-    width: 100%;
+    width: 97%;
     table-layout: fixed;
+    
   }
 
    .admin-table tr {
+   
     display: block;
     background: #fff;
     margin-bottom: 16px;
-    padding: 14px;
+    padding: 10px;
+
     border-radius: 14px;
     box-shadow: 0 6px 20px rgba(0,0,0,0.1);
   }
@@ -1494,7 +1501,7 @@ html, body {
     justify-content: space-between;
     align-items: center;
     padding: 6px 0;
-    font-size: 14px;
+    font-size: 13px;
     border: none;
   }
 
@@ -1543,9 +1550,12 @@ html, body {
 
   /* + Button */
   .add-btn {
-    width: 28px;
-    height: 28px;
-    font-size: 16px;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+  }
+  .table-header{
+    width:96%;
   }
 }
 
