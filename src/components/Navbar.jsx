@@ -27,7 +27,7 @@ useEffect(() => {
       {/* LEFT SECTION: Logo + Titles */}
       <div className="nav-left">
         <div className="nav-logo">
-          <img src="/logo192.png" alt="Thakur gym Logo" />
+          <img src="/favicon.ico" alt="Thakur-gym-logo" />
         </div>
 
         <div className="nav-title">
