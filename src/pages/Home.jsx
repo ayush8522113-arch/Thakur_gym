@@ -83,13 +83,15 @@ const downloadSlip = async (paymentId) => {
             "@type": "HealthClub",
             "name": "Thakur Gym",
             "url": "https://www.thakurgym.com",
-            "logo": "https://www.thakurgym.com/Thakur-gym-logo.PNG",
-            "image": "https://www.thakurgym.com/Thakur-gym-logo.PNG",
+            "logo": "https://www.thakurgym.com/logo192.PNG",
+            "image": "https://www.thakurgym.com/logo512.PNG",
             "description": "Thakur Gym is a modern fitness and training center offering personal training, customized workout plans, certified trainers, and high-quality gym equipment.",
             "address": {
               "@type": "PostalAddress",
-              "addressLocality": "Your City",
-              "addressRegion": "Your State",
+              "addressLocality": "5862+FQ5,Sector 17,huda , jagadhri ,yamunanagar",
+              "addressRegion": "Haryana",
+              "postalCode": "135003",
+              "addressLocality": "Jagadhri",
               "addressCountry": "IN"
             }
           }
