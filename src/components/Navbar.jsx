@@ -54,7 +54,7 @@ useEffect(() => {
         className="menu-icon mobile-only"
         onClick={() => setMenuOpen(!menuOpen)}
       >
-        ⋮⋮⋮
+       ☰
       </div>
 
 {/* LEFT SLIDE MOBILE MENU */}

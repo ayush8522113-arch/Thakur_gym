@@ -73,7 +73,7 @@ background: linear-gradient(135deg, #eefb3c, #ffea01);
   top: 15px;
   right: 15px;
   font-size: 26px;
-  color: white;
+  color: rgb(83, 86, 3);
   cursor: pointer;
 }
 
@@ -161,7 +161,7 @@ background: linear-gradient(135deg, #eefb3c, #ffea01);
 }
 
 .menu-icon{
-  color:black;
+  color:rgb(21, 56, 16);
   font-size:24px;
 }
 
@@ -2617,7 +2617,10 @@ background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
   
   }
-  body.dark-mode .nav-links a , .nav-links li , .menu-icon.mobile-only{
+  body.dark-mode .nav-links a , .nav-links li {
+    color:white;
+  }
+  body.dark-mode .menu-icon.mobile-only{
     color:white;
   }
   body.dark-mode  .program-details-page{
@@ -2642,6 +2645,9 @@ background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
     background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
   }
     body.dark-mode  .notice-channel-name{
+    color:white;
+  }
+  body.dark-mode .close-menu{
     color:white;
   }
     body.dark-mode  .timings-page{
