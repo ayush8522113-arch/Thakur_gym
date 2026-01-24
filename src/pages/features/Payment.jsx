@@ -51,7 +51,7 @@ const Payment = () => {
 
     } catch (error) {
       console.error(error);
-      alert("Payment failed. Try again.");
+      alert("Please Login first and then try again.");
     }
   };
 
