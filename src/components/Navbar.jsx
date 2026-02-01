@@ -86,7 +86,7 @@ useEffect(() => {
         <Link to="/timings">Timings</Link>
 
         <Link to="/notices" onClick={closeMenu}>Notices</Link>
-        <Link to="/register" onClick={closeMenu}>Join Now</Link>
+        <Link to="/register" onClick={closeMenu}>Join us Now</Link>
 
         
       </nav>
