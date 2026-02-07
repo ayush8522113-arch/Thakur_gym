@@ -28,9 +28,7 @@ const Footer = () => {
 
       <div className="footer-bottom">
         <p id="foot3">© {new Date().getFullYear()} Gym Website. All rights reserved.</p>
-        <h4></h4>
-        <h4></h4>                                       
-            <h4></h4> 
+
               
       </div>
       
